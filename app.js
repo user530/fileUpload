@@ -9,6 +9,25 @@ const app = express();
 // Port var
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  console.log(`Server is up and running at port ${port}...`);
-});
+// Import DB connection function
+const connectDB = require(`./db/connectDB`);
+
+const start = async () => {
+  try {
+    // Connect to the DB
+    await connectDB(process.env.MONGO_URI);
+
+    // Start listen
+    app.listen(port, () => {
+      console.log(`Server is up and running at port ${port}...`);
+    });
+  } catch (error) {
+    // Log error
+    console.log(error);
+
+    // Exit
+    process.exit(1);
+  }
+};
+
+start();
