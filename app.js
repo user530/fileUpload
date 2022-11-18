@@ -6,12 +6,17 @@ require(`express-async-errors`);
 const express = require(`express`);
 const app = express();
 
+const htmlRouter = require(`./routes/htmlRouter`);
+app.use(`/`, htmlRouter);
+
 // Port var
 const port = process.env.PORT || 5000;
 
 // Import DB connection function
 const connectDB = require(`./db/connectDB`);
+const router = require("./routes/htmlRouter");
 
+// Start function
 const start = async () => {
   try {
     // Connect to the DB
@@ -30,4 +35,5 @@ const start = async () => {
   }
 };
 
+// Start app
 start();
