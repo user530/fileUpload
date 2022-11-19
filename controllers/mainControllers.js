@@ -1,28 +1,25 @@
 // Import DB model
 const Inquiry = require(`../models/Inquiry`);
 
+// Import Status Codes
+const { StatusCodes } = require(`http-status-codes`);
+
 // Function to get all inquiry items
 const getAllInquiries = async (req, res, next) => {
   // Find all items
   const inquiries = await Inquiry.find({});
 
-  //   Show data
-  if (inquiries && inquiries.length > 0) console.log(inquiries);
-  else console.log(`No items to show`);
-
   //   Return data
-  return res.send(`<h1>This is F1</h1>`);
+  return res.status(StatusCodes.OK).json(inquiries);
 };
 
 // Function to add new item to the collection
 const addInquiry = async (req, res, next) => {
-  console.log(`F2 fired`);
-  22222222222222222222222222222222;
-  const { name, description, image } = req.body;
+  // Try to create new Inquiry with passed data
+  const newEntry = await Inquiry.create(req.body);
 
-  console.log(name, description, image);
-
-  res.send(`<h1>This is F2</h2>`);
+  // Return insert result
+  return res.status(StatusCodes.CREATED).json(newEntry);
 };
 
 module.exports = { getAllInquiries, addInquiry };
