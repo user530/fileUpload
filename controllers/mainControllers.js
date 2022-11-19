@@ -17,7 +17,7 @@ const getAllInquiries = async (req, res, next) => {
 // Function to add new item to the collection
 const addInquiry = async (req, res, next) => {
   console.log(`F2 fired`);
-
+  22222222222222222222222222222222;
   const { name, description, image } = req.body;
 
   console.log(name, description, image);
