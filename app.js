@@ -25,8 +25,19 @@ app.use(express.static(`./public`));
 // Use file upload(with temp files)
 app.use(fileUpload({ useTempFiles: true }));
 
+// Import router
 const router = require(`./routes/Router`);
+// Setup router
 app.use(`/`, router);
+
+// Import error handler middleware
+const errorHandler = require(`./middleware/errorHandler`);
+// Import 404 handler
+const notFound = require(`./middleware/notFound`);
+
+// Setup error handler and 404 route handler
+app.use(errorHandler);
+app.use(notFound);
 
 // Port var
 const port = process.env.PORT || 5000;
